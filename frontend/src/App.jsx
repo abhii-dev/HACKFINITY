@@ -6,20 +6,53 @@ import EquipmentDashboard from './pages/EquipmentDashboard';
 import SummaryReport from './pages/SummaryReport';
 import AdminDashboard from './pages/AdminDashboard';
 import Navbar from './components/Navbar.jsx'
-import EquipmentForm from './components/EquipmentForm.jsx';
+import AddEquipment from './pages/AddEquipment.jsx';
+import Layout from './components/Layout.jsx';
+import PlayerDashboard from './pages/PlayerDashboard.jsx';
+
+
 
 function App() {
   return (
     <div className="light min-h-screen text-black">
-      <Navbar />
+      {/* <Navbar /> */}
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<EquipmentDashboard />} />
-           <Route path="/summary-report" element={<SummaryReport />} />
+          {/* <Route path="/dashboard" element={<EquipmentDashboard />} /> */}
+           {/* <Route path="/summary-report" element={<SummaryReport />} /> */}
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
-            <Route path="/club-inventory" element={<EquipmentForm />} />
+            {/* <Route path="/club-inventory" element={<EquipmentForm />} /> */}
+                  <Route
+                path="/dashboard"
+                element={
+                  <Layout>
+                    <EquipmentDashboard />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/club-inventory"
+                element={
+                  <Layout>
+                   <AddEquipment />
+                  </Layout>
+                }
+              />
+                <Route
+                path="/summary-report"
+                element={
+                  <Layout>
+                    <SummaryReport />
+                  </Layout>
+                }
+              />
+
+              <Route path="/player-dashboard" element={<PlayerDashboard />} />
+
+            
+               
         </Routes>
       </Router>
     </div>

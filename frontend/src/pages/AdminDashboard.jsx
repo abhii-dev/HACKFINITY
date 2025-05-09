@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Sidebar from '../components/Sidebar';
 import EquipmentDashboard from './EquipmentDashboard';
-import EquipmentForm from './EquipmentForm';
-
-
+import AddEquipment from './AddEquipment';
 
 const AdminDashboard = () => {
   const [requests, setRequests] = useState([]);
@@ -38,9 +36,33 @@ const AdminDashboard = () => {
     fetchRequests();
   }, []);
 
+  const handleApproveRequest = async (id) => {
+    try {
+      const res = await axios.put(
+        `http://localhost:8080/api/requests/approve/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+      console.log(res.data);
+      setRequests((prevRequests) =>
+        prevRequests.map((req) =>
+          req._id === id ? { ...req, status: 'approved' } : req
+        )
+      );
+      alert('Request approved!');
+    } catch (err) {
+      console.error(err);
+      alert('Failed to approve request.');
+    }
+  };
+
   return (
     <div className="p-6">
-        <Sidebar />
+      <Sidebar />
 
       <h2 className="text-2xl font-bold mb-4">Admin Dashboard - All Requests</h2>
       {error && <p className="text-red-500">{error}</p>}
@@ -56,6 +78,7 @@ const AdminDashboard = () => {
               <th className="border px-4 py-2">Status</th>
               <th className="border px-4 py-2">Requested At</th>
               <th className="border px-4 py-2">Return Date</th>
+              <th className="border px-4 py-2">Approve</th> {/* New Approve column */}
             </tr>
           </thead>
           <tbody>
@@ -68,6 +91,16 @@ const AdminDashboard = () => {
                 <td className="border px-4 py-2">{new Date(req.createdAt).toLocaleString()}</td>
                 <td className="border px-4 py-2">
                   {req.returnDate ? new Date(req.returnDate).toLocaleString() : 'N/A'}
+                </td>
+                <td className="border px-4 py-2">
+                  {req.status === 'requested' && (
+                    <button
+                      onClick={() => handleApproveRequest(req._id)} // Trigger approval action
+                      className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                    >
+                      Approve
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}

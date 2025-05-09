@@ -10,7 +10,7 @@ const { getAllEquipment, addEquipment, editEquipment } = require('../controllers
 const router = express.Router();
 
 router.get('/', protect, getAllEquipment);
-router.post('/', protect, authorizeRoles('admin'), addEquipment);
+router.post('/add', protect, authorizeRoles('admin'), addEquipment);
 router.put('/:id', protect, authorizeRoles('admin'), editEquipment);
 
 module.exports = router;

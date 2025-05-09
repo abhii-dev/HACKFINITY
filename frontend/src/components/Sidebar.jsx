@@ -58,14 +58,8 @@ const Sidebar = () => {
           />
           <SidebarIcon
             icon={<IoPersonAddSharp />}
-            text="Add Coach"
-            onClick={() => gotoPage("/doctor/addnew")}
-            expanded={expanded}
-          />
-          <SidebarIcon
-            icon={<RiLogoutBoxFill />}
-            text="Logout"
-            onClick={handleLogout}
+            text="Summary Report"
+            onClick={() => gotoPage("/summary-report")}
             expanded={expanded}
           />
         </div>
