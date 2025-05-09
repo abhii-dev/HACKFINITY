@@ -24,6 +24,6 @@ router.put('/approve/:id', protect, authorizeRoles('admin'), approveRequest);
 router.put('/return/:id', protect, authorizeRoles('coach', 'player'), returnEquipment);
 
 // Admin views all requests
-router.get('/', protect, authorizeRoles('admin'), getAllRequests);
+router.get('/getall', protect, authorizeRoles('admin'), getAllRequests);
 
 module.exports = router;

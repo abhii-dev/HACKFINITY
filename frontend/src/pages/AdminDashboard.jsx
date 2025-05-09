@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Sidebar from '../components/Sidebar';
+import EquipmentDashboard from './EquipmentDashboard';
+import EquipmentForm from './EquipmentForm';
+
+
 
 const AdminDashboard = () => {
   const [requests, setRequests] = useState([]);
@@ -8,11 +13,12 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const res = await axios.get('/api/requests', {
+        const res = await axios.get('http://localhost:8080/api/requests/getall', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
+        console.log(res);
 
         // Handle both plain array or { requests: [...] } format
         const result = Array.isArray(res.data) ? res.data : res.data.requests;
@@ -34,6 +40,8 @@ const AdminDashboard = () => {
 
   return (
     <div className="p-6">
+        <Sidebar />
+
       <h2 className="text-2xl font-bold mb-4">Admin Dashboard - All Requests</h2>
       {error && <p className="text-red-500">{error}</p>}
       {requests.length === 0 ? (

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import EquipmentForm from '../components/EquipmentForm';
+// import EquipmentForm from '../components/EquipmentForm';
+import Sidebar from '../components/Sidebar';
 
 const EquipmentDashboard = () => {
   const [equipment, setEquipment] = useState([]);
@@ -33,20 +34,21 @@ const EquipmentDashboard = () => {
   }, []); // Fetch equipment when the component mounts
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6">
+    <div className="min-h-screen  text-black p-6">
+        <Sidebar />
       <h1 className="text-3xl font-bold mb-6">Equipment Management</h1>
 
-      <EquipmentForm
+      {/* <EquipmentForm
         onSubmit={handleFormSubmit}
         initialData={editingItem}
         onCancel={() => setEditingItem(null)}
-      />
+      /> */}
 
       <div className="mt-8">
         <h2 className="text-2xl mb-4">Inventory</h2>
-        <table className="w-full table-auto bg-gray-800 rounded">
+        <table className="w-full table-auto rounded">
           <thead>
-            <tr className="bg-gray-700 text-left">
+            <tr className="text-left">
               <th className="p-3">Name</th>
               <th className="p-3">Quantity</th>
               <th className="p-3">Location</th>
@@ -57,7 +59,7 @@ const EquipmentDashboard = () => {
           <tbody>
             {Array.isArray(equipment) && equipment.length > 0 ? (
               equipment.map((item) => (
-                <tr key={item._id} className="border-b border-gray-700">
+                <tr key={item._id} className="border-b">
                   <td className="p-3">{item.name}</td>
                   <td className="p-3">{item.quantity}</td>
                   <td className="p-3">{item.location}</td>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Sidebar from '../components/Sidebar';
 
 const EquipmentForm = ({ onSubmit, initialData, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -36,15 +37,20 @@ const EquipmentForm = ({ onSubmit, initialData, onCancel }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-xl">
+    <>
+     <Sidebar />
+    
+    <form onSubmit={handleSubmit} className="p-6 rounded-lg shadow-lg max-w-xl">
+    
       <h3 className="text-xl mb-4">{initialData ? 'Edit Equipment' : 'Add New Equipment'}</h3>
+       
       <input
         type="text"
         name="name"
         placeholder="Equipment Name"
         value={formData.name}
         onChange={handleChange}
-        className="w-full mb-3 p-2 rounded bg-gray-700 text-white"
+        className="w-full mb-3 p-2 rounded text-black"
         required
       />
       <input
@@ -53,7 +59,7 @@ const EquipmentForm = ({ onSubmit, initialData, onCancel }) => {
         placeholder="Quantity"
         value={formData.quantity}
         onChange={handleChange}
-        className="w-full mb-3 p-2 rounded bg-gray-700 text-white"
+        className="w-full mb-3 p-2 rounded text-black"
         required
       />
       <input
@@ -62,7 +68,7 @@ const EquipmentForm = ({ onSubmit, initialData, onCancel }) => {
         placeholder="Location"
         value={formData.location}
         onChange={handleChange}
-        className="w-full mb-3 p-2 rounded bg-gray-700 text-white"
+        className="w-full mb-3 p-2 rounded text-black"
         required
       />
       <input
@@ -71,7 +77,7 @@ const EquipmentForm = ({ onSubmit, initialData, onCancel }) => {
         placeholder="Threshold"
         value={formData.threshold}
         onChange={handleChange}
-        className="w-full mb-4 p-2 rounded bg-gray-700 text-white"
+        className="w-full mb-4 p-2 rounded text-black"
         required
       />
       <div className="flex justify-between">
@@ -85,6 +91,7 @@ const EquipmentForm = ({ onSubmit, initialData, onCancel }) => {
         )}
       </div>
     </form>
+    </>
   );
 };
 
