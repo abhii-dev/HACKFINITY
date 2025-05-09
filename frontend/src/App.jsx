@@ -8,7 +8,7 @@ import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   return (
-    <div className="dark bg-gray-900 min-h-screen text-white">
+    <div className="light min-h-screen text-black">
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
